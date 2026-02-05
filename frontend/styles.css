@@ -1,0 +1,592 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #333333;
+    --warning-color: #666666;
+    --danger-color: #999999;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --border-color: #e0e0e0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--primary-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+/* Header */
+.header {
+    background: var(--bg-secondary);
+    color: var(--primary-color);
+    padding: 30px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.tagline {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 30px 0;
+}
+
+/* Section */
+.section {
+    background: var(--bg-secondary);
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid var(--border-color);
+}
+
+.section-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.section-description {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    border: 1px solid;
+    margin-left: 10px;
+}
+
+.badge-warning {
+    color: var(--warning-color);
+    border-color: var(--warning-color);
+}
+
+.badge-danger {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.badge-success {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.badge-info {
+    color: #00ffff;
+    border-color: #00ffff;
+}
+
+/* Card Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    text-align: center;
+}
+
+
+
+.card-title {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+
+.card-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    word-break: break-word;
+}
+
+.card-hint {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    opacity: 0.6;
+}
+
+/* Permission Table */
+.permission-table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.permission-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 2fr auto;
+    align-items: center;
+    background: var(--bg-primary);
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    gap: 15px;
+}
+
+.permission-icon {
+    font-size: 0.7rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--warning-color);
+}
+
+.permission-name {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.permission-description {
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.permission-status {
+    text-align: right;
+}
+
+/* Location Demo */
+.location-demo {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid var(--primary-color);
+    font-size: 0.95rem;
+    cursor: pointer;
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.location-info {
+    margin-top: 20px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    background: var(--bg-primary);
+    padding: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.info-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    opacity: 0.7;
+}
+
+.info-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.map-placeholder {
+    background: var(--bg-primary);
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+
+.map-text {
+    text-align: center;
+    padding: 20px;
+}
+
+.map-text p:first-child {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.map-hint {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-bottom: 15px;
+}
+
+.coordinates-display {
+    font-size: 1rem;
+    padding: 8px 16px;
+    border: 1px solid var(--primary-color);
+}
+
+.alert {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background: var(--bg-primary);
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+}
+
+/* Tips Grid */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.tip-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    position: relative;
+}
+
+.tip-number {
+    position: absolute;
+    top: -12px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    background: var(--bg-secondary);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.tip-card h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-size: 1rem;
+}
+
+.tip-card p {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+/* Info Section */
+.info-section {
+    border: 1px solid var(--primary-color);
+}
+
+.info-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.info-box p {
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    line-height: 1.8;
+    opacity: 0.9;
+}
+
+.warning-text {
+    color: var(--danger-color);
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+/* Footer */
+.footer {
+    background: var(--bg-secondary);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.footer-note {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Todo Sidebar */
+.todo-sidebar {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100vh;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border-color);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-sidebar.open {
+    right: 0;
+}
+
+.todo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.todo-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.todo-toggle {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    line-height: 1;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.todo-toggle:hover {
+    opacity: 0.7;
+}
+
+.todo-input-container {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    gap: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.todo-input-container input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    background: var(--bg-primary);
+    color: var(--primary-color);
+}
+
+.todo-input-container input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.todo-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.todo-input-container button {
+    flex: 1;
+    padding: 8px 16px;
+    border: 1px solid var(--primary-color);
+    background: var(--bg-primary);
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.todo-input-container button:hover {
+    background: var(--primary-color);
+    color: var(--bg-primary);
+}
+
+.todo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.todo-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 10px;
+}
+
+.todo-item.note {
+    background: var(--bg-primary);
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+.todo-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+.todo-text {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.todo-type {
+    font-size: 0.75rem;
+    color: var(--warning-color);
+    margin-right: 8px;
+    font-weight: 600;
+}
+
+.todo-delete {
+    background: none;
+    border: none;
+    color: var(--danger-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.todo-delete:hover {
+    opacity: 0.7;
+}
+
+.todo-open-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: var(--primary-color);
+    color: var(--bg-primary);
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    z-index: 999;
+    transition: opacity 0.2s;
+}
+
+.todo-open-btn:hover {
+    opacity: 0.8;
+}
+
+.todo-open-btn.hidden {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .section {
+        padding: 15px;
+    }
+    
+    .section-header h2 {
+        font-size: 1.2rem;
+    }
+    
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .permission-row {
+        grid-template-columns: 40px 1fr;
+        gap: 10px;
+    }
+    
+    .permission-description {
+        grid-column: 2;
+    }
+    
+    .permission-status {
+        grid-column: 2;
+        text-align: left;
+        margin-top: 5px;
+    }
+    
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
