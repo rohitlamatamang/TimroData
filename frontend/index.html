@@ -3,272 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TimroData - Web Privacy Exposure Demonstration</title>
+    <title>TimroData — Web Privacy Exposure Demo</title>
+    <meta name="description" content="See exactly what data websites collect about you automatically — no permissions needed.">
+
+    <!-- Inter font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons (lightweight open-source icon set) -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <!-- Notepad Sidebar -->
-    <div class="todo-sidebar" id="todoSidebar">
-        <div class="todo-header">
-            <h3>Notes</h3>
-            <button class="todo-toggle" id="todoToggle">×</button>
+
+    <!-- ===================== NOTES SIDEBAR ===================== -->
+    <div class="sidebar" id="todoSidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">
+                <i data-lucide="notebook-pen" class="icon-sm"></i>
+                <span>Notes</span>
+            </div>
+            <button class="icon-btn" id="todoToggle" aria-label="Close notes">
+                <i data-lucide="x"></i>
+            </button>
         </div>
-        <div class="todo-input-container">
-            <input type="text" id="todoInput" placeholder="Add note or task..." />
-            <div class="todo-buttons">
-                <button id="addNote" title="Add Note">Note</button>
-                <button id="addTodo" title="Add Task">Task</button>
+        <div class="sidebar-input">
+            <input type="text" id="todoInput" placeholder="Write a note or task..." autocomplete="off" />
+            <div class="sidebar-actions">
+                <button id="addNote" class="btn-outline-sm">
+                    <i data-lucide="sticky-note" class="icon-xs"></i> Note
+                </button>
+                <button id="addTodo" class="btn-outline-sm">
+                    <i data-lucide="check-square" class="icon-xs"></i> Task
+                </button>
             </div>
         </div>
-        <ul class="todo-list" id="todoList"></ul>
+        <ul class="sidebar-list" id="todoList"></ul>
     </div>
-    
-    <button class="todo-open-btn" id="todoOpenBtn">Notes</button>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1 class="title">TimroData</h1>
-            <p class="subtitle">Web Privacy Exposure Demonstration System</p>
-            <p class="tagline">Understanding what websites know about you</p>
+    <!-- Floating Notes Button -->
+    <button class="fab" id="todoOpenBtn" aria-label="Open notes">
+        <i data-lucide="notebook-pen"></i>
+        <span>Notes</span>
+    </button>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <div class="nav-brand">
+                <i data-lucide="shield-alert" class="brand-icon"></i>
+                <span class="brand-name">TimroData</span>
+            </div>
+            <div class="nav-right">
+                <span class="nav-clock" id="nav-clock"></span>
+                <div class="nav-badge">
+                    <span class="pulse-dot"></span>
+                    Live Scan
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===================== HERO ===================== -->
+    <header class="hero">
+        <div class="hero-inner container">
+            <div class="hero-tag">
+                <i data-lucide="eye" class="icon-xs"></i>
+                Privacy Exposure Demo
+            </div>
+            <h1 class="hero-title">What does this website<br>know about <span class="highlight">you</span>?</h1>
+            <p class="hero-sub">Every website you visit silently collects this data — no permissions needed. Scroll down to see yours.</p>
+            <div class="hero-scroll-hint">
+                <i data-lucide="chevrons-down" class="icon-sm"></i>
+            </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container">
-        
-        <!-- Baseline Exposure Section -->
-        <section class="section">
+    <!-- ===================== MAIN ===================== -->
+    <main class="container main-content">
+
+        <!-- ── Section 1: Baseline Data ── -->
+        <section class="section fade-in">
             <div class="section-header">
-                <h2>Baseline Data Exposure</h2>
-                <p class="section-description">
-                    <span class="badge badge-warning">No Permission Required</span>
-                    This information is automatically exposed when you visit any website
-                </p>
+                <div class="section-label label-warning">
+                    <i data-lucide="zap" class="icon-xs"></i>
+                    No Permission Required
+                </div>
+                <h2 class="section-title">Baseline Data Exposure</h2>
+                <p class="section-desc">This data is silently collected the moment you open any webpage — without asking.</p>
             </div>
-            
+
             <div class="card-grid">
-                <div class="card">
-                    <h3 class="card-title">IP Address</h3>
-                    <p class="card-value" id="ip-address">Detecting...</p>
-                    <p class="card-hint">Your unique internet identifier</p>
+
+                <div class="data-card" data-delay="0">
+                    <div class="data-card-icon">
+                        <i data-lucide="globe"></i>
+                    </div>
+                    <div class="data-card-body">
+                        <span class="data-label">IP Address</span>
+                        <span class="data-value skeleton" id="ip-address">Detecting…</span>
+                        <span class="data-hint">Your unique internet identifier</span>
+                    </div>
                 </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Rough Location</h3>
-                    <p class="card-value" id="rough-location">Detecting...</p>
-                    <p class="card-hint">City/Country based on IP</p>
+
+                <div class="data-card" data-delay="50">
+                    <div class="data-card-icon">
+                        <i data-lucide="map-pin"></i>
+                    </div>
+                    <div class="data-card-body">
+                        <span class="data-label">Rough Location</span>
+                        <span class="data-value skeleton" id="rough-location">Detecting…</span>
+                        <span class="data-hint">City / Country via IP lookup</span>
+                    </div>
                 </div>
-                
-                <div class="card">
-                    <h3 class="card-title">ISP / Network</h3>
-                    <p class="card-value" id="isp">Detecting...</p>
-                    <p class="card-hint">Your internet service provider</p>
+
+                <div class="data-card" data-delay="100">
+                    <div class="data-card-icon">
+                        <i data-lucide="wifi"></i>
+                    </div>
+                    <div class="data-card-body">
+                        <span class="data-label">ISP / Network</span>
+                        <span class="data-value skeleton" id="isp">Detecting…</span>
+                        <span class="data-hint">Your internet service provider</span>
+                    </div>
                 </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Browser</h3>
-                    <p class="card-value" id="browser">Detecting...</p>
-                    <p class="card-hint">Browser type and version</p>
+
+                <div class="data-card" data-delay="150">
+                    <div class="data-card-icon">
+                        <i data-lucide="chrome"></i>
+                    </div>
+                    <div class="data-card-body">
+                        <span class="data-label">Browser</span>
+                        <span class="data-value" id="browser">Detecting…</span>
+                        <span class="data-hint">Browser name and version</span>
+                    </div>
                 </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Operating System</h3>
-                    <p class="card-value" id="os">Detecting...</p>
-                    <p class="card-hint">Your device platform</p>
+
+                <div class="data-card" data-delay="200">
+                    <div class="data-card-icon">
+                        <i data-lucide="monitor"></i>
+                    </div>
+                    <div class="data-card-body">
+                        <span class="data-label">Operating System</span>
+                        <span class="data-value" id="os">Detecting…</span>
+                        <span class="data-hint">Your device platform</span>
+                    </div>
                 </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Language</h3>
-                    <p class="card-value" id="language">Detecting...</p>
-                    <p class="card-hint">Preferred language setting</p>
+
+                <div class="data-card" data-delay="250">
+                    <div class="data-card-icon">
+                        <i data-lucide="languages"></i>
+                    </div>
+                    <div class="data-card-body">
+                        <span class="data-label">Language</span>
+                        <span class="data-value" id="language">Detecting…</span>
+                        <span class="data-hint">Browser language preference</span>
+                    </div>
                 </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Timezone</h3>
-                    <p class="card-value" id="timezone">Detecting...</p>
-                    <p class="card-hint">Your local time offset</p>
+
+                <div class="data-card" data-delay="300">
+                    <div class="data-card-icon">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <div class="data-card-body">
+                        <span class="data-label">Timezone</span>
+                        <span class="data-value" id="timezone">Detecting…</span>
+                        <span class="data-hint">Your local timezone</span>
+                    </div>
                 </div>
-                
-                <div class="card">
-                    <h3 class="card-title">Screen Resolution</h3>
-                    <p class="card-value" id="screen-size">Detecting...</p>
-                    <p class="card-hint">Display dimensions</p>
+
+                <div class="data-card" data-delay="350">
+                    <div class="data-card-icon">
+                        <i data-lucide="scan"></i>
+                    </div>
+                    <div class="data-card-body">
+                        <span class="data-label">Screen Resolution</span>
+                        <span class="data-value" id="screen-size">Detecting…</span>
+                        <span class="data-hint">Physical display dimensions</span>
+                    </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- Permission Status Section -->
-        <section class="section">
+        <!-- ── Section 2: Permissions ── -->
+        <section class="section fade-in">
             <div class="section-header">
-                <h2>Browser Permission Status</h2>
-                <p class="section-description">
-                    Sensitive features require explicit user permission
-                </p>
+                <div class="section-label label-info">
+                    <i data-lucide="lock" class="icon-xs"></i>
+                    Browser Permissions
+                </div>
+                <h2 class="section-title">Permission Status</h2>
+                <p class="section-desc">Sensitive APIs require your explicit approval. Here is what this page currently has access to.</p>
             </div>
-            
-            <div class="permission-table">
-                <div class="permission-row">
-                    <div class="permission-icon">LOCATION</div>
-                    <div class="permission-name">Location Access</div>
-                    <div class="permission-description">GPS coordinates</div>
-                    <div class="permission-status">
-                        <span class="badge" id="location-status">Unknown</span>
+
+            <div class="perm-list">
+
+                <div class="perm-row">
+                    <div class="perm-icon-wrap perm-location">
+                        <i data-lucide="map-pin"></i>
                     </div>
-                </div>
-                
-                <div class="permission-row">
-                    <div class="permission-icon">CAMERA</div>
-                    <div class="permission-name">Camera Access</div>
-                    <div class="permission-description">Video capture</div>
-                    <div class="permission-status">
-                        <span class="badge" id="camera-status">Unknown</span>
+                    <div class="perm-info">
+                        <span class="perm-name">Location Access</span>
+                        <span class="perm-desc">Exact GPS coordinates — street-level precision</span>
                     </div>
+                    <span class="perm-badge" id="location-status">Unknown</span>
                 </div>
-                
-                <div class="permission-row">
-                    <div class="permission-icon">MIC</div>
-                    <div class="permission-name">Microphone Access</div>
-                    <div class="permission-description">Audio recording</div>
-                    <div class="permission-status">
-                        <span class="badge" id="microphone-status">Unknown</span>
+
+                <div class="perm-row">
+                    <div class="perm-icon-wrap perm-camera">
+                        <i data-lucide="camera"></i>
                     </div>
-                </div>
-                
-                <div class="permission-row">
-                    <div class="permission-icon">NOTIFY</div>
-                    <div class="permission-name">Notifications</div>
-                    <div class="permission-description">Push messages</div>
-                    <div class="permission-status">
-                        <span class="badge" id="notification-status">Unknown</span>
+                    <div class="perm-info">
+                        <span class="perm-name">Camera Access</span>
+                        <span class="perm-desc">Live video feed from your webcam or phone camera</span>
                     </div>
+                    <span class="perm-badge" id="camera-status">Unknown</span>
                 </div>
+
+                <div class="perm-row">
+                    <div class="perm-icon-wrap perm-mic">
+                        <i data-lucide="mic"></i>
+                    </div>
+                    <div class="perm-info">
+                        <span class="perm-name">Microphone Access</span>
+                        <span class="perm-desc">Audio capture — voice, room sounds, background noise</span>
+                    </div>
+                    <span class="perm-badge" id="microphone-status">Unknown</span>
+                </div>
+
+                <div class="perm-row">
+                    <div class="perm-icon-wrap perm-notify">
+                        <i data-lucide="bell"></i>
+                    </div>
+                    <div class="perm-info">
+                        <span class="perm-name">Notifications</span>
+                        <span class="perm-desc">Push alerts even when your browser tab is closed</span>
+                    </div>
+                    <span class="perm-badge" id="notification-status">Unknown</span>
+                </div>
+
             </div>
         </section>
 
-        <!-- Location Permission Demo Section -->
-        <section class="section">
+        <!-- ── Section 3: Location Demo ── -->
+        <section class="section fade-in">
             <div class="section-header">
-                <h2>Location Permission Demonstration</h2>
-                <p class="section-description">
-                    <span class="badge badge-danger">Permission Required</span>
-                    See how granting location access reveals your exact position
-                </p>
+                <div class="section-label label-danger">
+                    <i data-lucide="alert-triangle" class="icon-xs"></i>
+                    Permission Required
+                </div>
+                <h2 class="section-title">Location Permission Demo</h2>
+                <p class="section-desc">Click below to see how granting location access reveals your exact GPS position.</p>
             </div>
-            
+
             <div class="location-demo">
-                <button class="btn btn-primary" id="request-location">
-                    Request Location Permission
+                <button class="btn-primary" id="request-location">
+                    <i data-lucide="crosshair"></i>
+                    Request Location Access
                 </button>
-                
-                <div class="location-info" id="location-info" style="display: none;">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <span class="info-label">Latitude:</span>
-                            <span class="info-value" id="latitude">--</span>
+
+                <div class="location-result" id="location-info" style="display:none;">
+                    <div class="loc-grid">
+                        <div class="loc-item">
+                            <span class="loc-label">Latitude</span>
+                            <span class="loc-value mono" id="latitude">--</span>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Longitude:</span>
-                            <span class="info-value" id="longitude">--</span>
+                        <div class="loc-item">
+                            <span class="loc-label">Longitude</span>
+                            <span class="loc-value mono" id="longitude">--</span>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Accuracy:</span>
-                            <span class="info-value" id="accuracy">--</span>
+                        <div class="loc-item">
+                            <span class="loc-label">Accuracy</span>
+                            <span class="loc-value mono" id="accuracy">--</span>
                         </div>
-                        <div class="info-item">
-                            <span class="info-label">Altitude:</span>
-                            <span class="info-value" id="altitude">--</span>
+                        <div class="loc-item">
+                            <span class="loc-label">Altitude</span>
+                            <span class="loc-value mono" id="altitude">--</span>
                         </div>
                     </div>
-                    
                     <div class="map-placeholder" id="map-container">
-                        <div class="map-text">
-                            <p>Map showing your exact location</p>
-                            <p class="map-hint">In a production version, this would show an interactive map</p>
-                            <p class="coordinates-display" id="coordinates-display"></p>
-                        </div>
+                        <i data-lucide="map" class="map-icon"></i>
+                        <p class="map-label">Your location</p>
+                        <p class="mono map-coords" id="coordinates-display"></p>
+                        <a class="map-link" id="map-link" href="#" target="_blank" rel="noopener" style="display:none;">
+                            <i data-lucide="external-link"></i>
+                            Open in OpenStreetMap
+                        </a>
+                        <p class="map-note">Interactive map available when backend is connected</p>
                     </div>
                 </div>
-                
-                <div class="alert" id="location-error" style="display: none;"></div>
+
+                <div class="error-box" id="location-error" style="display:none;">
+                    <i data-lucide="alert-circle"></i>
+                    <span id="location-error-text"></span>
+                </div>
             </div>
         </section>
 
-        <!-- Privacy Tips Section -->
-        <section class="section">
+        <!-- ── Section 4: Tips ── -->
+        <section class="section fade-in">
             <div class="section-header">
-                <h2>Privacy Protection Tips</h2>
-                <p class="section-description">
-                    Simple steps to protect your online privacy
-                </p>
+                <div class="section-label label-success">
+                    <i data-lucide="shield-check" class="icon-xs"></i>
+                    Stay Protected
+                </div>
+                <h2 class="section-title">Privacy Protection Tips</h2>
+                <p class="section-desc">Simple habits that drastically reduce your digital footprint.</p>
             </div>
-            
+
             <div class="tips-grid">
                 <div class="tip-card">
-                    <div class="tip-number">1</div>
-                    <h3>Review Permissions Regularly</h3>
-                    <p>Check what permissions you've granted to websites and revoke unnecessary access in your browser settings.</p>
+                    <div class="tip-icon"><i data-lucide="settings"></i></div>
+                    <h3>Review Permissions</h3>
+                    <p>Regularly audit what you've granted. Go to browser Settings → Privacy → Site Permissions and revoke anything unnecessary.</p>
                 </div>
-                
                 <div class="tip-card">
-                    <div class="tip-number">2</div>
-                    <h3>Use VPN Services</h3>
-                    <p>A VPN masks your real IP address and location, making it harder for websites to track your physical location.</p>
+                    <div class="tip-icon"><i data-lucide="shield"></i></div>
+                    <h3>Use a VPN</h3>
+                    <p>A VPN hides your real IP and location from every website you visit, making IP-based tracking much harder.</p>
                 </div>
-                
                 <div class="tip-card">
-                    <div class="tip-number">3</div>
-                    <h3>Disable Location by Default</h3>
-                    <p>Keep location services turned off and only enable them for trusted websites when absolutely necessary.</p>
+                    <div class="tip-icon"><i data-lucide="map-pin-off"></i></div>
+                    <h3>Block Location by Default</h3>
+                    <p>Keep location access denied globally. Only approve it for trusted apps like Maps when you actually need it.</p>
                 </div>
-                
                 <div class="tip-card">
-                    <div class="tip-number">4</div>
-                    <h3>Use Privacy-Focused Browsers</h3>
-                    <p>Consider browsers like Firefox or Brave that offer enhanced privacy protection and tracking prevention.</p>
+                    <div class="tip-icon"><i data-lucide="flame"></i></div>
+                    <h3>Privacy-First Browsers</h3>
+                    <p>Firefox and Brave block fingerprinting and trackers by default. Far safer than Chrome for everyday browsing.</p>
                 </div>
-                
                 <div class="tip-card">
-                    <div class="tip-number">5</div>
-                    <h3>Clear Cookies Regularly</h3>
-                    <p>Cookies can track your browsing habits. Clear them regularly or use private/incognito browsing mode.</p>
+                    <div class="tip-icon"><i data-lucide="trash-2"></i></div>
+                    <h3>Clear Cookies Often</h3>
+                    <p>Cookies track your entire browsing session across sites. Clear them weekly or use a container-based browser.</p>
                 </div>
-                
                 <div class="tip-card">
-                    <div class="tip-number">6</div>
-                    <h3>Read Privacy Policies</h3>
-                    <p>Before granting permissions, understand how websites will use and store your personal information.</p>
+                    <div class="tip-icon"><i data-lucide="file-text"></i></div>
+                    <h3>Read Before You Allow</h3>
+                    <p>Before tapping "Allow" on any permission prompt, ask: why does this site need this? If unclear, deny it.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Educational Note -->
-        <section class="section info-section">
-            <div class="info-box">
-                <h3>About This Demonstration</h3>
-                <p>
-                    This tool is designed for <strong>educational purposes only</strong> to help you understand 
-                    web privacy and data exposure. The data shown here is collected <strong>only in your browser</strong> 
-                    and is not transmitted or stored anywhere. This demonstration shows how websites can access 
-                    various types of information, emphasizing the importance of being cautious about granting 
-                    permissions online.
-                </p>
-                <p class="warning-text">
-                    WARNING: Always be mindful of what information you share online and what permissions you grant to websites.
-                </p>
+        <!-- ── Section 5: About ── -->
+        <section class="section about-section fade-in">
+            <div class="about-inner">
+                <div class="about-icon">
+                    <i data-lucide="shield-alert"></i>
+                </div>
+                <div class="about-content">
+                    <h3>About This Tool</h3>
+                    <p>
+                        TimroData is an <strong>open educational tool</strong> that demonstrates exactly how much information
+                        your browser exposes passively. All data shown is collected and displayed <strong>only in your own browser</strong> —
+                        nothing is sent to any server. There is no tracking, no analytics, no cookies.
+                    </p>
+                    <div class="about-chips">
+                        <span class="chip"><i data-lucide="check" class="icon-xs"></i> No data stored</span>
+                        <span class="chip"><i data-lucide="check" class="icon-xs"></i> No server calls</span>
+                        <span class="chip"><i data-lucide="check" class="icon-xs"></i> Educational only</span>
+                        <span class="chip"><i data-lucide="check" class="icon-xs"></i> Open source</span>
+                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
+    <!-- ===================== FOOTER ===================== -->
     <footer class="footer">
-        <div class="container">
-            <p>Educational Privacy Awareness Demo | TimroData © 2026</p>
-            <p class="footer-note">This tool does not collect, store, or transmit any user data</p>
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <i data-lucide="shield-alert" class="icon-sm"></i>
+                <span>TimroData</span>
+            </div>
+            <p class="footer-copy">© 2026 · Educational Privacy Awareness Demo</p>
+            <p class="footer-note">
+                <i data-lucide="lock" class="icon-xs"></i>
+                No data is collected, stored, or transmitted
+            </p>
         </div>
     </footer>
 
     <script src="app.js"></script>
+    <script>
+        // Initialize Lucide icons after DOM load
+        lucide.createIcons();
+    </script>
 </body>
 </html>
