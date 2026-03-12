@@ -119,7 +119,7 @@ Use this structure (only Week 1 parts):
 
 ```
 timrodata/
-├── frontend/
+├── 1/
 │   ├── index.html
 │   ├── styles.css
 │   └── app.js
@@ -132,7 +132,7 @@ timrodata/
 
 **What Goes Where:**
 
-- `frontend/app.js` → collects browser data, calls backend, updates UI
+- `1/app.js` → collects browser data, calls backend, updates UI
 - `backend/app.py` → defines API endpoints and returns JSON
 - `backend/requirements.txt` → Flask dependency
 
@@ -158,11 +158,11 @@ python --version
 ### Step 1 — Create Folders (5 minutes)
 
 Create:
-- `timrodata/frontend`
+- `timrodata/1`
 - `timrodata/backend`
 
 ```bash
-mkdir -p timrodata/frontend
+mkdir -p timrodata/1
 mkdir -p timrodata/backend
 ```
 
@@ -281,7 +281,7 @@ http://127.0.0.1:5000/api/health
 
 #### Option A: Python Server
 
-In `frontend/`:
+In `1/`:
 ```bash
 python -m http.server 5500
 ```
@@ -302,7 +302,7 @@ http://127.0.0.1:5500
 
 ### Step 5 — Frontend Code (30 minutes)
 
-#### Update `frontend/app.js`
+#### Update `1/app.js`
 
 Add this function to send data to backend:
 
